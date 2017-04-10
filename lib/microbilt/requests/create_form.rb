@@ -44,6 +44,7 @@ module Microbilt
           output[:token] = token
           output[:add_customer_form_url] = add_customer_url(token)
           output[:get_data_url] = get_data_url(token)
+          output[:get_html_data_url] = get_html_data_url(token)
         end
 
         output
@@ -80,6 +81,10 @@ module Microbilt
 
       def get_data_url(token)
         "#{Microbilt.configuration.server_url}#{Microbilt::Configuration::GET_DATA_URI}?reference=#{token}"
+      end
+
+      def get_html_data_url(token)
+        "#{Microbilt.configuration.server_url}#{Microbilt::Configuration::GET_HTML_DATA_URI}?guid=#{token}"
       end
 
       def all_params(customer)

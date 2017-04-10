@@ -49,6 +49,10 @@ RSpec.describe Microbilt::Requests::CreateForm do
         expect(response[:get_data_url]).to match /#{response[:token]}/
         expect(response[:get_data_url]).to match /#{Microbilt::Configuration::GET_DATA_URI}/
 
+        expect(response[:get_html_data_url]).to match /https\:\/\//i
+        expect(response[:get_html_data_url]).to match /#{response[:token]}/
+        expect(response[:get_html_data_url]).to match /#{Microbilt::Configuration::GET_HTML_DATA_URI}/
+
         expect(response[:http_response][:status]).to eq 200
         expect(response[:http_response][:body].empty?).to eq false
       end
