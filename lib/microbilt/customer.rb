@@ -25,17 +25,17 @@ module Microbilt
       {
         'Customer.FirstName' => first_name,
         'Customer.LastName' => last_name,
-        'Customer.SSN' => sin,
+        'Customer.SSN' => formatted_sin,
         'Customer.DOB' => formatted_date(date_of_birth),
         'Customer.Address' => formatted_address,
         'Customer.City' => city,
         'Customer.State' => state,
-        'Customer.ZIP' => zip_code,
+        'Customer.ZIP' => formatted_zip,
         'Customer.Country' => formatted_country,
-        'Customer.Phone' => home_phone,
-        'Customer.WorkPhone' => work_phone,
-        'Customer.CellPhone' => mobile_phone,
-        'Customer.Email' => email,
+        'Customer.Phone' => formatted_phone(home_phone),
+        'Customer.WorkPhone' => formatted_phone(work_phone),
+        'Customer.CellPhone' => formatted_phone(mobile_phone),
+        'Customer.Email' => formatted_email,
         'Customer.ABAnumber' => bank_transit,
         'Customer.AccountNumber' => bank_account,
         'Customer.DirectDepositAmount' => direct_deposit_amount,
@@ -53,14 +53,20 @@ module Microbilt
 
     def formatted_address
       address = address1
-      address += "\n" + address2 unless address2.to_s.empty?
+      address += "\n, " + address2 unless address2.to_s.empty?
       address
     end
 
-    def microbilt_address(loan_application)
-      address = loan_application.address1
-      address += "\n" + loan_application.address2 if loan_application.address2.present?
-      address
+    def formatted_zip
+      zip_code.gsub(/[^0-9a-z]/i, '')
+    end
+
+    def formatted_phone(phone)
+      phone.gsub(/[^0-9]/i, '')[0..9]
+    end
+
+    def formatted_email(address = email)
+      address.downcase.strip
     end
 
     def formatted_country
@@ -99,6 +105,10 @@ module Microbilt
       else
         nil
       end
+    end
+
+    def formatted_sin
+      sin.gsub(/[^0-9]/i, '')
     end
   end
 end
