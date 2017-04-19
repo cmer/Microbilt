@@ -1,5 +1,7 @@
 # Microbilt
 
+[![Build Status](https://travis-ci.org/cmer/microbilt.svg?branch=master)](https://travis-ci.org/cmer/microbilt)
+
 A simple library to interact with the Microbilt IBV web service.
 
 ## License
