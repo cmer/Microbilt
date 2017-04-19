@@ -33,16 +33,16 @@ RSpec.describe Microbilt::Customer do
       p = customer.to_params
       expect(p['Customer.FirstName']).to eq options[:first_name]
       expect(p['Customer.LastName']).to eq options[:last_name]
-      expect(p['Customer.SSN']).to eq options[:sin]
+      expect(p['Customer.SSN']).to eq options[:sin].gsub(' ', '')
       expect(p['Customer.DOB']).to eq '01021980'
-      expect(p['Customer.Address']).to eq options[:address1] + "\n" + options[:address2]
+      expect(p['Customer.Address']).to eq options[:address1] + "\n, " + options[:address2]
       expect(p['Customer.City']).to eq options[:city]
       expect(p['Customer.State']).to eq options[:state]
-      expect(p['Customer.ZIP']).to eq options[:zip_code]
+      expect(p['Customer.ZIP']).to eq options[:zip_code].gsub(' ', '')
       expect(p['Customer.Country']).to eq 'CAN'
-      expect(p['Customer.Phone']).to eq options[:home_phone]
-      expect(p['Customer.WorkPhone']).to eq options[:work_phone]
-      expect(p['Customer.CellPhone']).to eq options[:mobile_phone]
+      expect(p['Customer.Phone']).to eq options[:home_phone].gsub(/[^0-9]/i, '')[0..9]
+      expect(p['Customer.WorkPhone']).to eq options[:work_phone].gsub(/[^0-9]/i, '')[0..9]
+      expect(p['Customer.CellPhone']).to eq options[:mobile_phone].gsub(/[^0-9]/i, '')[0..9]
       expect(p['Customer.Email']).to eq options[:email]
       expect(p['Customer.ABAnumber']).to eq options[:bank_transit]
       expect(p['Customer.AccountNumber']).to eq options[:bank_account]
