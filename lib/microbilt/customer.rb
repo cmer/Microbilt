@@ -58,11 +58,11 @@ module Microbilt
     end
 
     def formatted_zip
-      zip_code.gsub(/[^0-9a-z]/i, '')
+      zip_code.to_s.gsub(/[^0-9a-z]/i, '')
     end
 
     def formatted_phone(phone)
-      phone.gsub(/[^0-9]/i, '')[0..9]
+      phone.to_s.gsub(/[^0-9]/i, '')[0..9]
     end
 
     def formatted_email(address = email)
@@ -108,7 +108,7 @@ module Microbilt
     end
 
     def formatted_sin
-      sin.gsub(/[^0-9]/i, '')
+      sin.to_s.gsub(/[^0-9]/i, '')
     end
   end
 end
