@@ -84,7 +84,7 @@ module Microbilt
       end
 
       def get_html_data_url(token)
-        "#{Microbilt.configuration.server_url}#{Microbilt::Configuration::GET_HTML_DATA_URI}?guid=#{token}"
+        "#{Microbilt.configuration.server_url}#{Microbilt::Configuration::GET_HTML_DATA_URI}?guid={#{token}}"
       end
 
       def all_params(customer)
